@@ -1,41 +1,21 @@
-import { useGetBlogsQuery, useNewBlogsMutation } from "./redux/api";
+import Counter from "./components/Counter";
+import ProductList from "./components/ProductList";
+import CartList from "./components/CartList";
+import { useGetBlogsQuery } from "./store/slice/blogApi";
 import Blogs from "./components/Blogs";
-import { useState } from "react";
+
+// import Blogs from "./components/Blogs";
 
 function App() {
-  const { isLoading, isError, data } = useGetBlogsQuery("");
-  const [newBlogs] = useNewBlogsMutation()
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const submitHandler = () => {
-    e.preventDafult();
-
-    
-  }
-
-
+  const { data } = useGetBlogsQuery("");
+  console.log("jjd....>>>>>>>" , data)
+  
   return (
     <div className="p-4">
-      <form className="flex gap-6 " onSubmit={submitHandler}>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border border-red-600"
-        />
-        <input
-          type="text"
-          placeholder="Body"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          className="border border-red-600"
-        />
-        <button type="submit" className="border border-purple-600">
-          Add
-        </button>
-      </form>
-
+      
+      <Counter />
+      <ProductList />
+      <CartList blogs={data} />
       {/* <Blogs blogs={data} /> */}
     </div>
   );
