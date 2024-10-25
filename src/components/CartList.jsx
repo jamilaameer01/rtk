@@ -46,7 +46,7 @@ const CartList = ({ blogs }) => {
 
       <h1 className="text-center text-4xl font-bold pb-4 text-purple-700">Blogs</h1>
       {/* BLOGS */}
-      <Blogs blogs={blogs} />
+      {/* <Blogs blogs={blogs} /> */}
     </div>
   );
 };
