@@ -5,14 +5,12 @@ import CartList from "./components/CartList";
 import Blogs from "./components/Blogs";
 import BlogDetails from "./components/BlogDetails";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useCreateBlogMutation } from "./store/slice/blogApi";
 import CreateBlogForm from "./components/CreateBlogForm";
+import UpdateBlog from "./components/UpdateBlog";
 
 function App() {
  
-  const [updateBlog, result] = useCreateBlogMutation();
-  console.log("result>>>>>>",result)
-
+  
   return (
     <div className="p-4">
       <Router>
@@ -20,12 +18,11 @@ function App() {
           {/* <Counter /> */}
           {/* <ProductList /> */}
           {/* <CartList /> */}
-         <CreateBlogForm/>
+          <CreateBlogForm/>
           <Routes>
-           
             <Route path="/" element={<Blogs />} />
-           
             <Route path="/blog/:id" element={<BlogDetails />} />
+            <Route path="/blog/update/:id" element={<UpdateBlog />} />
           </Routes>
         </div>
       </Router>
