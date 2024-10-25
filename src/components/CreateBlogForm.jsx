@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCreateBlogMutation } from "../store/slice/blogApi";
 import { useGetBlogsQuery } from "../store/slice/blogApi";
 
-const CreateBlogForm = () => {
+const CreateBlogForm = ({ onBlogCreated }) => {
   const { refetch } = useGetBlogsQuery();
   const [createBlog, { isLoading, isSuccess, isError }] =
     useCreateBlogMutation();
@@ -27,9 +27,8 @@ const CreateBlogForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createBlog(formData);
-    refetch(); // Refetch the blogs after creating a new one
-    // Clear the form after submission
+    refetch(); 
+    const newBlog = await createBlog(formData).unwrap();
     setFormData({
       title: "",
       content: "",
@@ -39,6 +38,7 @@ const CreateBlogForm = () => {
       likes: 0,
       comments: 0,
     });
+    onBlogCreated(newBlog);
   };
 
   return (
@@ -48,6 +48,7 @@ const CreateBlogForm = () => {
           Create New Blog Post
         </h2>
         <form onSubmit={handleSubmit} className="space-y-5">
+          
           <div>
             <label className="block text-gray-700 text-sm font-semibold">
               Title
@@ -110,30 +111,6 @@ const CreateBlogForm = () => {
               value={formData.image}
               onChange={handleChange}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-semibold">
-              Likes
-            </label>
-            <input
-              type="number"
-              name="likes"
-              value={formData.likes}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-semibold">
-              Comments
-            </label>
-            <input
-              type="number"
-              name="comments"
-              value={formData.comments}
-              onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

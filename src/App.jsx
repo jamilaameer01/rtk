@@ -13,12 +13,13 @@ function App() {
   
   return (
     <div className="p-4">
+      <h1 className="text-4xl text-purple-600 text-center font-bold">Blogs</h1>
       <Router>
         <div className="p-4">
           {/* <Counter /> */}
           {/* <ProductList /> */}
           {/* <CartList /> */}
-          <CreateBlogForm/>
+          {/* <CreateBlogForm/> */}
           <Routes>
             <Route path="/" element={<Blogs />} />
             <Route path="/blog/:id" element={<BlogDetails />} />

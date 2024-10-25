@@ -32,7 +32,7 @@ export const blogApi = createApi({
         method: "DELETE",
       }),
       invalidatesTags: [{ type: "Blog" }], // This will invalidate the Blog tag
-    }),
+    }),  
   }),
 });
 
